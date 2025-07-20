@@ -1,15 +1,33 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  color: #FEF2BF;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  margin: 5%;
-  color: #FEF2BF;
+  font-size: 2.5rem;
+  margin: 5% 2% 2%;
+}
+
+.scoreboard {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#theme-toggle {
+  padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  cursor: pointer;
 }
 
 .container {
@@ -34,21 +52,10 @@ body {
   cursor: pointer;
 }
 
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.yellow {
-  background-color: yellow;
-}
+.red { background-color: red; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.yellow { background-color: yellow; }
 
 .pressed {
   box-shadow: 0 0 20px white;
@@ -56,11 +63,21 @@ body {
 }
 
 .game-over {
-  background-color: red;
+  background-color: red !important;
   opacity: 0.8;
 }
 
-/* Responsive Design */
+/* Light Theme */
+body.light {
+  background-color: #f2f2f2;
+  color: #011F3F;
+}
+body.light .btn.red { background-color: #ff7f7f; }
+body.light .btn.green { background-color: #90ee90; }
+body.light .btn.blue { background-color: #87cefa; }
+body.light .btn.yellow { background-color: #ffff99; }
+
+/* Responsive */
 @media (max-width: 768px) {
   .btn {
     width: 100px;
@@ -74,5 +91,10 @@ body {
 
   .container {
     width: 90%;
+  }
+
+  .scoreboard {
+    flex-direction: column;
+    gap: 10px;
   }
 }
