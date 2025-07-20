@@ -1,12 +1,12 @@
-// Game Variables
 var buttonColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var started = false;
 var level = 0;
+var highScore = 0;
 
-// Start Game on Keypress
-$(document).keypress(function () {
+// Start game on keypress or tap
+$(document).on("keypress touchstart", function () {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();
@@ -14,39 +14,35 @@ $(document).keypress(function () {
   }
 });
 
-// Handle Button Click
-$(".btn").click(function () {
+// Button click/tap
+$(".btn").on("click touchstart", function (e) {
+  e.preventDefault(); // avoid double event
   var userChosenColor = $(this).attr("id");
   userClickedPattern.push(userChosenColor);
 
   playSound(userChosenColor);
   animatePress(userChosenColor);
-
   checkAnswer(userClickedPattern.length - 1);
 });
 
-// Check User's Answer
+// Check user answer
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
     if (userClickedPattern.length === gamePattern.length) {
-      setTimeout(function () {
-        nextSequence();
-      }, 1000);
+      setTimeout(nextSequence, 1000);
     }
   } else {
     playSound("wrong");
     $("body").addClass("game-over");
+    setTimeout(() => $("body").removeClass("game-over"), 200);
 
-    setTimeout(function () {
-      $("body").removeClass("game-over");
-    }, 200);
-
-    $("#level-title").text("Game Over, Press Any Key to Restart");
+    $("#level-title").text("Game Over, Press Any Key or Tap to Restart");
+    updateHighScore();
     startOver();
   }
 }
 
-// Generate Next Sequence
+// Generate next sequence
 function nextSequence() {
   userClickedPattern = [];
   level++;
@@ -63,23 +59,34 @@ function nextSequence() {
   playSound(randomChosenColor);
 }
 
-// Play Sound for Color
+// Play sound
 function playSound(name) {
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
 
-// Animate Button Press
+// Animate button
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
-  setTimeout(function () {
-    $("#" + currentColor).removeClass("pressed");
-  }, 100);
+  setTimeout(() => $("#" + currentColor).removeClass("pressed"), 100);
 }
 
-// Reset Game State
+// Reset game
 function startOver() {
   level = 0;
   gamePattern = [];
   started = false;
 }
+
+// Update high score
+function updateHighScore() {
+  if (level > highScore) {
+    highScore = level - 1;
+    $("#high-score").text(highScore);
+  }
+}
+
+// Theme toggle
+$("#theme-toggle").on("click", function () {
+  $("body").toggleClass("light");
+});
