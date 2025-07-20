@@ -16,14 +16,7 @@ Test your memory by repeating increasingly difficult color sequences.
 - 💡 "Press a key to start" functionality
 - 🌙 Optional dark/light mode toggle (planned)
 - 📱 Responsive design for mobile and desktop
-
----
-
-## 📸 Preview
-
-![Simon Game Screenshot](https://raw.githubusercontent.com/your-username/simon-game/main/assets/screenshot.png)  
-*You can replace this link with a real screenshot of your deployed site.*
-
+  
 ---
 
 ## 🛠️ Tech Stack
