@@ -80,13 +80,13 @@ function startOver() {
 
 // Update high score
 function updateHighScore() {
-  if (level > highScore) {
+  if (level - 1 > highScore) {
     highScore = level - 1;
     $("#high-score").text(highScore);
   }
 }
 
-// Theme toggle
-$("#theme-toggle").on("click", function () {
-  $("body").toggleClass("light");
+// Theme toggle functionality
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  document.body.classList.toggle("light");
 });
